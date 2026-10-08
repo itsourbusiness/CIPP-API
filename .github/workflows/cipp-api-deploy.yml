@@ -1,0 +1,26 @@
+
+name: Build and deploy CIPP-API to Azure
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout CIPP-API
+        uses: actions/checkout@v4
+
+      - name: Deploy to Azure Function App
+        uses: Azure/functions-action@v1
+        with:
+          app-name: 'cippi7676'
+          slot-name: 'Production'
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CIPPI7676 }}
