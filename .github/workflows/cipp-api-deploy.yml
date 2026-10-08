@@ -2,6 +2,9 @@
 name: Build and deploy CIPP-API to Azure
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 permissions:
